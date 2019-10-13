@@ -13,6 +13,9 @@
 
 package leetcode.editor.cn;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.Assert.assertArrayEquals;
 
 /**
@@ -24,27 +27,23 @@ public class TwoSum {
         int[] nums = {2, 7, 11, 15};
         int target = 9;
         int[] answer = {0, 1};
-        assertArrayEquals(solution.twoSum(nums, target), answer);
+        int[] result = solution.twoSum(nums, target);
+        assertArrayEquals(result, answer);
     }
 
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] twoSum(int[] nums, int target) {
-            int[] result = new int[2];
-            if (nums.length < 2) {
-                return result;
+            Map<Integer, Integer> map = new HashMap<>(16);
+            for (int i = 0; i < nums.length; i++) {
+                 int complement = target - nums[i];
+                 if (map.containsKey(complement)) {
+                     return new int[] {map.get(complement), i};
+                 }
+                map.put(nums[i], i);
             }
-            for (int i = 0; i < nums.length - 1; i++) {
-                for (int j = i + 1; j < nums.length; j++) {
-                    if (nums[i] + nums[j] == target) {
-                        result[0] = i;
-                        result[1] = j;
-                        return result;
-                    }
-                }
-            }
-            return result;
+            throw new IllegalArgumentException("No two sum solution");
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
