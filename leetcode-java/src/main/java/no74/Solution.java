@@ -9,14 +9,17 @@ public class Solution {
         if (matrix == null || matrix.length == 0) {
             return false;
         }
-        int row = 0, col = matrix[0].length - 1;
-        while (row < matrix.length && col >= 0) {
-            if (target == matrix[row][col]) {
+        int start = 0, rows = matrix.length, cols = matrix[0].length;
+        int end = rows * cols - 1;
+        while (start <= end) {
+            int mid = (start + end) / 2;
+            if (matrix[mid / cols][mid % cols] == target) {
                 return true;
-            } else if (target > matrix[row][col]) {
-                row++;
+            }
+            if (matrix[mid / cols][mid % cols] < target) {
+                start = mid + 1;
             } else {
-                col--;
+                end = mid - 1;
             }
         }
         return false;
