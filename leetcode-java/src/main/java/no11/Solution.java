@@ -6,15 +6,14 @@ package no11;
  */
 public class Solution {
     public int maxArea(int[] height) {
-        int maxarea = 0, l = 0, r = height.length - 1;
-        while (l < r) {
-            maxarea = Math.max(maxarea, Math.min(height[l], height[r]) * (r - l));
-            if (height[l] < height[r]) {
-                l++;
-            } else {
-                r--;
-            }
+        int i = 0;
+        int j = height.length - 1;
+        int res = 0;
+        while (i < j) {
+            res = height[i] < height[j] ?
+                    Math.max(res, (j - i) * height[i++]):
+                    Math.max(res, (j- i) * height[j--]);
         }
-        return maxarea;
+        return res;
     }
 }

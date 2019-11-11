@@ -1,4 +1,4 @@
-package no144;
+package no145;
 
 import base.TreeNode;
 
@@ -7,20 +7,20 @@ import java.util.List;
 
 /**
  * @author boyiren
- * @date 2019-10-27
+ * @date 2019-11-07
  */
 public class Solution {
-    public List<Integer> preorderTraversal(TreeNode root) {
+    public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        preorder(root, res);
+        postorder(root, res);
         return res;
     }
 
-    private void preorder(TreeNode root, List<Integer> res) {
+    private void postorder(TreeNode root, List<Integer> res) {
         if (root != null) {
+            postorder(root.left, res);
+            postorder(root.right, res);
             res.add(root.val);
-            preorder(root.left, res);
-            preorder(root.right, res);
         }
     }
 }
